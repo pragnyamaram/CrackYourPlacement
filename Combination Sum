@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void combination_sum_helper(vector<int>& candidates, int target,vector<int> &current_vector,vector<vector<int>> &ans,int index){
+        //base condition
+
+        if(target==0){
+            ans.push_back(current_vector);
+            return;
+        }
+        if(target<0){
+            return;
+        }
+        for(int i =index;i<candidates.size();i++){
+            current_vector.push_back(candidates[i]);
+            combination_sum_helper(candidates,target-candidates[i],current_vector,ans,i);
+            // if answer is found or not we need to back track in any way
+            current_vector.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> current_vector;
+        combination_sum_helper(candidates,target,current_vector,ans,0);
+
+        return ans;
+    }
+};
